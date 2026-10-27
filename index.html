@@ -8,35 +8,30 @@
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
   body { background-color: #ffffff; color: #1e293b; overflow: hidden; height: 100vh; }
 
-  /* خلفية SVG */
   .bg-svg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-
-  /* الحاوية الرئيسية */
   .page { display: flex; height: 100vh; width: 100%; transition: opacity 0.5s ease, transform 0.5s ease; }
   .page.hidden { opacity: 0; pointer-events: none; position: absolute; transform: scale(0.98); }
 
-  /* قسم الصورة (نص الشاشة - شمال) */
+  /* قسم الصورة */
   .image-side {
-    width: 50%; height: 100vh; padding: 30px;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    width: 50%; height: 100vh; padding: 20px;
+    display: flex; justify-content: center; align-items: center;
     border-left: 1px solid #e2e8f0; background: rgba(248, 250, 252, 0.5);
   }
 
   .image-container {
-    width: 100%; height: 85%; border-radius: 24px; overflow: hidden;
+    width: 90%; height: 90%; border-radius: 24px; overflow: hidden;
     border: 2px solid #2563eb; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
   }
 
   .image-container img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .image-side p { margin-top: 20px; color: #64748b; font-size: 18px; font-weight: 600; }
 
-  /* قسم الفورم (نص الشاشة - يمين) */
+  /* قسم الفورم */
   .form-side {
     width: 50%; height: 100vh; display: flex; flex-direction: column;
     justify-content: center; align-items: center; padding: 40px; position: relative;
   }
 
-  /* الخطوات */
   .step-container {
     width: 100%; max-width: 500px; position: absolute;
     opacity: 0; transform: translateY(20px); transition: all 0.4s ease;
@@ -46,7 +41,7 @@
 
   .step-header h1 { font-size: 36px; color: #0f172a; margin-bottom: 30px; text-align: center; }
 
-  /* كارت الإنبوت المخفي */
+  /* كارت الإنبوت */
   .input-card {
     width: 100%; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
     padding: 20px 24px; transition: all 0.3s ease; display: flex;
@@ -59,31 +54,30 @@
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
   }
 
-  /* الأيقونات SVG */
   .icon-svg {
     width: 28px; height: 28px; flex-shrink: 0;
     stroke: #2563eb; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
   }
 
-  /* الإنبوت المخفي تماماً (شفاف) */
+  /* الإنبوت المخفي */
   .hidden-input {
     width: 100%; border: none; background: transparent; outline: none;
     font-size: 18px; color: transparent; padding: 5px 0; position: absolute;
     top: 0; left: 0; right: 0; bottom: 0; padding-right: 60px; cursor: text;
-    caret-color: #2563eb; /* عشان يبان مؤشر الكتابة */
+    caret-color: #2563eb;
   }
 
-  /* النص اللي بيظهر مكان الإنبوت */
+  /* عرض النص كنجوم */
   .input-display {
     width: 100%; font-size: 18px; color: #1e293b; pointer-events: none;
     padding: 5px 0; min-height: 30px; text-align: right;
+    letter-spacing: 2px; /* مسافة بين النجوم */
   }
   .input-display::before {
-    content: attr(data-placeholder); color: #94a3b8;
+    content: attr(data-placeholder); color: #94a3b8; letter-spacing: normal;
   }
   .input-display.has-text::before { content: ''; }
 
-  /* زرار التالي */
   .next-btn {
     width: 100%; padding: 18px; background: #2563eb; color: #ffffff;
     border: 2px solid #2563eb; border-radius: 14px; font-size: 18px;
@@ -91,29 +85,32 @@
   }
   .next-btn:hover { background: #ffffff; color: #2563eb; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2); }
 
-  /* مؤشر التقدم */
   .progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 3px; margin-top: 20px; overflow: hidden; }
   .progress-fill { height: 100%; background: #2563eb; width: 0%; transition: width 0.4s ease; border-radius: 3px; }
 
-  /* ============ صفحة التحقق ============ */
+  /* صفحة التحقق */
   .loading-page {
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     height: 100vh; width: 100%; background: #ffffff;
   }
+  
+  /* الصورة كبرت ومفيش دوران */
   .loader-img {
-    width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
-    border: 4px solid #2563eb; padding: 5px;
-    animation: pulse 1.5s infinite alternate, spin 4s linear infinite;
+    width: 240px; 
+    height: 240px; 
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 4px solid #2563eb; 
+    padding: 5px;
+    animation: pulse 1.5s infinite alternate; /* النبض بس، شيلت الدوران */
   }
   @keyframes pulse { from { box-shadow: 0 0 10px rgba(37,99,235,0.2); } to { box-shadow: 0 0 40px rgba(37,99,235,0.6); } }
-  @keyframes spin { 100% { transform: rotate(360deg); } }
   
   .loading-text { margin-top: 30px; font-size: 22px; color: #2563eb; font-weight: bold; animation: blink 1.2s infinite; }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  /* ============ لوحة التحكم ============ */
+  /* لوحة التحكم */
   .dashboard-page { display: flex; height: 100vh; width: 100%; background: #f1f5f9; }
-  
   .sidebar {
     width: 260px; background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
     color: #ffffff; padding: 30px 20px; display: flex; flex-direction: column;
@@ -126,8 +123,6 @@
   .sidebar a:hover, .sidebar a.active { background: #2563eb; color: #ffffff; }
 
   .dashboard-content { flex: 1; padding: 30px; overflow-y: auto; position: relative; }
-  
-  /* صفحات الداشبورد */
   .dash-view { display: none; animation: fadeIn 0.4s ease; }
   .dash-view.active { display: block; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -147,17 +142,15 @@
 </head>
 <body>
 
-<!-- خلفية SVG -->
 <svg class="bg-svg" xmlns="http://www.w3.org/2000/svg">
   <circle cx="90%" cy="10%" r="300" fill="#2563eb" opacity="0.04"/>
   <circle cx="10%" cy="90%" r="400" fill="#7c3aed" opacity="0.04"/>
 </svg>
 
-<!-- ============ صفحة تسجيل الدخول ============ -->
+<!-- صفحة تسجيل الدخول -->
 <div class="page" id="loginPage">
   <div class="image-side">
     <div class="image-container"><img src="sayed.png" alt="Sayed"></div>
-    <p>Sayed • Web Developer</p>
   </div>
 
   <div class="form-side">
@@ -178,7 +171,7 @@
       <div class="step-header"><h1>كلمة المرور</h1></div>
       <div class="input-card" onclick="document.getElementById('in2').focus()">
         <svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-        <input type="password" class="hidden-input" id="in2" oninput="syncText('in2', 'disp2', true)" />
+        <input type="password" class="hidden-input" id="in2" oninput="syncText('in2', 'disp2')" />
         <div class="input-display" id="disp2" data-placeholder="كلمة المرور"></div>
       </div>
       <button class="next-btn" onclick="nextStep(2)">التالي ←</button>
@@ -190,7 +183,7 @@
       <div class="step-header"><h1>الإيميل</h1></div>
       <div class="input-card" onclick="document.getElementById('in3').focus()">
         <svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <input type="email" class="hidden-input" id="in3" oninput="syncText('in3', 'disp3')" />
+        <input type="text" class="hidden-input" id="in3" oninput="syncText('in3', 'disp3')" />
         <div class="input-display" id="disp3" data-placeholder="الإيميل"></div>
       </div>
       <button class="next-btn" onclick="nextStep(3)">التالي ←</button>
@@ -271,7 +264,7 @@
   </div>
 </div>
 
-<!-- ============ صفحة التحقق (Loader) ============ -->
+<!-- صفحة التحقق -->
 <div class="page hidden" id="loadingPage">
   <div class="loading-page">
     <img src="sayed.png" class="loader-img" alt="Loading">
@@ -279,11 +272,9 @@
   </div>
 </div>
 
-<!-- ============ لوحة التحكم المزيفة ============ -->
+<!-- لوحة التحكم -->
 <div class="page hidden" id="dashPage">
   <div class="dashboard-page">
-    
-    <!-- القائمة الجانبية -->
     <div class="sidebar">
       <h2>Sayed Admin</h2>
       <a class="active" onclick="switchDash('home', this)">
@@ -304,10 +295,7 @@
       </a>
     </div>
 
-    <!-- المحتوى -->
     <div class="dashboard-content">
-      
-      <!-- صفحة الرئيسية -->
       <div class="dash-view active" id="dash-home">
         <div class="dash-header"><h1>لوحة التحكم</h1><span>👤 Sayed</span></div>
         <div class="dash-cards">
@@ -335,11 +323,9 @@
         </div>
       </div>
 
-      <!-- صفحة الإحصائيات -->
       <div class="dash-view" id="dash-stats">
         <div class="dash-header"><h1>الإحصائيات المفصلة</h1><span>📊</span></div>
         <div class="dash-card">
-          <p style="font-size: 18px; color: #64748b; margin-bottom: 20px;">هنا يمكنك رؤية تحليل مفصل للبيانات.</p>
           <svg viewBox="0 0 800 300" style="width: 100%; height: 300px;">
             <circle cx="400" cy="150" r="100" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="2"/>
             <circle cx="400" cy="150" r="100" fill="none" stroke="#2563eb" stroke-width="30" stroke-dasharray="200 628" stroke-linecap="round"/>
@@ -350,7 +336,6 @@
         </div>
       </div>
 
-      <!-- صفحة المستخدمين -->
       <div class="dash-view" id="dash-users">
         <div class="dash-header"><h1>إدارة المستخدمين</h1><span>👥</span></div>
         <div class="dash-card">
@@ -374,7 +359,6 @@
         </div>
       </div>
 
-      <!-- صفحة الإعدادات -->
       <div class="dash-view" id="dash-settings">
         <div class="dash-header"><h1>الإعدادات</h1><span>⚙️</span></div>
         <div class="dash-card">
@@ -383,31 +367,25 @@
           <div style="padding: 15px; background: #f8fafc; border-radius: 10px;">🌙 الوضع الليلي: لا</div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
-  // مزامنة النص بين الإنبوت المخفي والعرض
-  function syncText(inputId, displayId, isPassword = false) {
+  // الدالة دي بتحول أي حاجة بتتكتب لنجوم
+  function syncText(inputId, displayId) {
     const input = document.getElementById(inputId);
     const display = document.getElementById(displayId);
     
     if (input.value.length > 0) {
       display.classList.add('has-text');
-      if (isPassword) {
-        display.textContent = '•'.repeat(input.value.length);
-      } else {
-        display.textContent = input.value;
-      }
+      display.textContent = '•'.repeat(input.value.length); // نجوم دايماً
     } else {
       display.classList.remove('has-text');
       display.textContent = '';
     }
   }
 
-  // الانتقال بين الخطوات
   function nextStep(currentStep) {
     const currentEl = document.getElementById('step' + currentStep);
     if (currentEl) currentEl.classList.remove('active');
@@ -427,7 +405,6 @@
     if (nextEl) nextEl.classList.add('active');
   }
 
-  // التبديل بين صفحات لوحة التحكم
   function switchDash(viewId, element) {
     document.querySelectorAll('.dash-view').forEach(v => v.classList.remove('active'));
     document.getElementById('dash-' + viewId).classList.add('active');
